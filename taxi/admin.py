@@ -1,0 +1,90 @@
+from django.contrib import admin
+from taxi.models import Car, Manufacturer, Driver
+from django.contrib.auth.admin import UserAdmin
+
+
+class DriverAdmin(UserAdmin):
+    fieldsets = (
+        (
+            "Additional info",
+            {
+                "fields": ("username", "password")
+            }
+        ),
+        (
+            "Personal Info",
+            {
+                "fields": (
+                    "license_number",
+                    "first_name",
+                    "last_name",
+                    "email"
+                )
+            }
+        ),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions"
+                )
+            }
+        ),
+        (
+            "Important dates",
+            {
+                "fields": (
+                    "last_login",
+                    "date_joined"
+                )
+            }
+        ),
+    )
+    add_fieldsets = (
+        (
+            "Additional info",
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "password1",
+                    "password2",
+                    "license_number"
+                ),
+            }
+        ),
+
+    )
+    list_display = (
+        "username",
+        "first_name",
+        "last_name",
+        "license_number",
+        "email",
+        "is_staff"
+    )
+    search_fields = (
+        "username",
+        "first_name",
+        "last_name",
+        "license_number"
+    )
+
+
+class CarAdmin(admin.ModelAdmin):
+    list_display = ("model", "manufactured")
+    search_fields = ("model",)
+    list_filter = ("manufactured",)
+
+
+class ManufacturerAdmin(admin.ModelAdmin):
+    list_display = ("name", "country",)
+
+
+admin.site.register(Car, CarAdmin)
+admin.site.register(Manufacturer)
+admin.site.register(Driver, DriverAdmin)
