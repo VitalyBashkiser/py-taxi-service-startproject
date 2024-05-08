@@ -76,9 +76,9 @@ class DriverAdmin(UserAdmin):
 
 
 class CarAdmin(admin.ModelAdmin):
-    list_display = ("model", "manufactured")
+    list_display = ("model", "manufacturer")
     search_fields = ("model",)
-    list_filter = ("manufactured",)
+    list_filter = ("manufacturer",)
 
 
 class ManufacturerAdmin(admin.ModelAdmin):
