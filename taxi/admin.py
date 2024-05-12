@@ -3,6 +3,7 @@ from taxi.models import Car, Manufacturer, Driver
 from django.contrib.auth.admin import UserAdmin
 
 
+@admin.register(Driver)
 class DriverAdmin(UserAdmin):
     fieldsets = (
         (
@@ -75,16 +76,13 @@ class DriverAdmin(UserAdmin):
     )
 
 
+@admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ("model", "manufacturer")
     search_fields = ("model",)
     list_filter = ("manufacturer",)
 
 
+@admin.register(Manufacturer)
 class ManufacturerAdmin(admin.ModelAdmin):
     list_display = ("name", "country",)
-
-
-admin.site.register(Car, CarAdmin)
-admin.site.register(Manufacturer)
-admin.site.register(Driver, DriverAdmin)
